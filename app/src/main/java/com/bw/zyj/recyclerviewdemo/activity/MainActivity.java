@@ -1,4 +1,4 @@
-package com.bw.zyj.recyclerviewdemo;
+package com.bw.zyj.recyclerviewdemo.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.bw.zyj.recyclerviewdemo.R;
 import com.bw.zyj.recyclerviewdemo.fragment.FragmentOne;
 
 import java.util.ArrayList;
@@ -53,13 +54,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        list.add("社会");
-        list.add("游戏");
-        list.add("热点");
-        list.add("视频");
-        list.add("娱乐");
-        list.add("图片");
-        list.add("科技");
+        list.add("猪");
+        list.add("妖");
+        list.add("精");
     }
 
     /**

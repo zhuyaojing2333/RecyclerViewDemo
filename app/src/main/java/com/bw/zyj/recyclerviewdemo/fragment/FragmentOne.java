@@ -5,15 +5,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.bw.zyj.recyclerviewdemo.Goods;
-import com.bw.zyj.recyclerviewdemo.MyAdapter;
-import com.bw.zyj.recyclerviewdemo.OkHttp;
 import com.bw.zyj.recyclerviewdemo.R;
+import com.bw.zyj.recyclerviewdemo.adapter.MyAdapter;
+import com.bw.zyj.recyclerviewdemo.bean.Goods;
+import com.bw.zyj.recyclerviewdemo.http.OkHttp;
+import com.bw.zyj.recyclerviewdemo.listener.RecyclerViewClickListener;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -41,6 +42,18 @@ public class FragmentOne extends Fragment{
         mRecyclerView = (RecyclerView) view.findViewById(R.id.id_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        mRecyclerView.addOnItemTouchListener(new RecyclerViewClickListener(getContext(), new RecyclerViewClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Toast.makeText(getContext(),"Click "+list.get(position).getGoods_name(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                Toast.makeText(getContext(),"Long Click "+list.get(position).getGoods_name(),Toast.LENGTH_SHORT).show();
+            }
+        }));
+
         mAdapter = new MyAdapter(getActivity(), list);
 
         mRecyclerView.setAdapter(mAdapter);
@@ -62,10 +75,6 @@ public class FragmentOne extends Fragment{
                 Goods g = gson.fromJson(result, Goods.class);
 
                 list.addAll(g.getData());
-
-                for (int i = 0; i < list.size(); i++) {
-                    Log.e("sdasd", list.get(i).getGoods_name());
-                }
 
             }
         });

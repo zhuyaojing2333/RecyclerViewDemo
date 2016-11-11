@@ -1,4 +1,4 @@
-package com.bw.zyj.recyclerviewdemo;
+package com.bw.zyj.recyclerviewdemo.application;
 
 import android.app.Application;
 

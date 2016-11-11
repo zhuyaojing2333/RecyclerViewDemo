@@ -1,4 +1,4 @@
-package com.bw.zyj.recyclerviewdemo;
+package com.bw.zyj.recyclerviewdemo.http;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -18,6 +18,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * Created by fan on 2016/11/9.
@@ -44,15 +45,22 @@ public class OkHttp {
      * 构造方法
      */
     private OkHttp() {
+        // 可以通过实现 Logger 接口更改日志保存位置
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
+//        mClient = new OkHttpClient.Builder().addInterceptor(loggingInterceptor).build();
         mClient = new OkHttpClient();
-
         /**
          * 在这里直接设置连接超时.读取超时，写入超时
          */
-        mClient.newBuilder().connectTimeout(10, TimeUnit.SECONDS);
-        mClient.newBuilder().readTimeout(10, TimeUnit.SECONDS);
-        mClient.newBuilder().writeTimeout(10, TimeUnit.SECONDS);
+
+        OkHttpClient.Builder builder = mClient.newBuilder();
+        builder.connectTimeout(10, TimeUnit.SECONDS);
+        builder.readTimeout(10, TimeUnit.SECONDS);
+        builder.writeTimeout(10, TimeUnit.SECONDS);
+        builder.addInterceptor(loggingInterceptor);
+        mClient = builder.build();
 
         /**
          * 如果是用的3.0之前的版本  使用以下直接设置连接超时.读取超时，写入超时

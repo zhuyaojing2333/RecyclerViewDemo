@@ -1,4 +1,4 @@
-package com.bw.zyj.recyclerviewdemo;
+package com.bw.zyj.recyclerviewdemo.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bw.zyj.recyclerviewdemo.R;
+import com.bw.zyj.recyclerviewdemo.bean.Goods;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
@@ -29,9 +31,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        MyViewHolder holder = new MyViewHolder(LayoutInflater.from(
-                context).inflate(R.layout.item, parent,
-                false));
+        MyViewHolder holder = new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false));
+
+
         return holder;
     }
 
@@ -51,11 +53,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder>{
         TextView tv;
         ImageView image;
 
-        public MyViewHolder(View view)
-        {
+        public MyViewHolder(View view) {
             super(view);
             tv = (TextView) view.findViewById(R.id.id_num);
             image = (ImageView) view.findViewById(R.id.image);
+
         }
+
     }
 }
