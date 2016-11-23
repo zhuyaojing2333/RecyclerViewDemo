@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.bw.zyj.recyclerviewdemo.R;
 import com.bw.zyj.recyclerviewdemo.fragment.FragmentOne;
+import com.bw.zyj.recyclerviewdemo.fragment.FragmentThree;
+import com.bw.zyj.recyclerviewdemo.fragment.FragmentTwo;
 
 import java.util.ArrayList;
 
@@ -17,7 +19,8 @@ import shanyao.tabpagerindictor.TabPageIndicator;
 public class MainActivity extends AppCompatActivity {
     private TabPageIndicator indicator;
     private ViewPager viewPager;
-    private ArrayList<String> list = new ArrayList<String>();
+    private ArrayList<String> list = new ArrayList<>();
+    private ArrayList<Fragment> mlist = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
 
         indicator = (TabPageIndicator)findViewById(R.id.indicator);
         viewPager = (ViewPager)findViewById(R.id.viewPager);
+
+        viewPager.setOffscreenPageLimit(3);
         FragmentPagerAdapter adapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
 
             @Override
@@ -38,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public Fragment getItem(int position) {
-                return new FragmentOne();
+                return mlist.get(position);
             }
 
             @Override
@@ -54,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
+        mlist.add(new FragmentOne());
+        mlist.add(new FragmentTwo());
+        mlist.add(new FragmentThree());
+
         list.add("猪");
         list.add("妖");
         list.add("精");
